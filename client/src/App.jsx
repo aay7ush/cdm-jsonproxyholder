@@ -4,6 +4,7 @@ const App = () => {
   const [posts, setPosts] = useState([])
   const [selectedPost, setSelectedPost] = useState(null)
   const [comments, setComments] = useState([])
+  const [showDetail, setShowDetail] = useState(false)
 
   const API_BASE_URL = 'http://localhost:1338'
 
@@ -22,6 +23,7 @@ const App = () => {
           .then((res) => res.json())
           .then((data) => setComments(data))
       })
+    setShowDetail((prev) => !prev)
   }
 
   return (
@@ -39,7 +41,7 @@ const App = () => {
               {post.title}
             </h2>
 
-            {selectedPost && selectedPost.id === post.id && (
+            {showDetail && selectedPost && selectedPost.id === post.id && (
               <div className="my-2 space-y-3">
                 <p className="text-gray-700">{selectedPost.body}</p>
                 <h3 className="text-lg font-medium text-indigo-600">
